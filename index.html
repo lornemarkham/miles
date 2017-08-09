@@ -1,25 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <title>Miles API Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-
 <body>
+  <script>
+    (function() {
 
+      function createCORSRequest(method, url) {
+        var xhr = new XMLHttpRequest();
+        if ("withCredentials" in xhr) {
+          xhr.open(method, url, true);
+        } else if (typeof XDomainRequest != "undefined") {
+          xhr = new XDomainRequest();
+          xhr.open(method, url);
+        } else {
+          xhr = null;
+        }
+        return xhr;
+      }
 
-<h1>Miles API</h1>
+      var xhr = createCORSRequest('GET', url);
+      if (!xhr) {
+        throw new Error('CORS not supported');
+      }
 
+      //AccountID: WEBINTTEST
+      //AccountKey: ae92772f-9980-4954-87ff-397d583007ad
 
-<script>
-(function() {
-var getJSON = function(url, callback) { var xhr = new XMLHttpRequest(); xhr.open('GET', url, true); xhr.responseType = 'json'; xhr.onload = function() { var status = xhr.status; if (status == 200) { callback(null, xhr.response); } else { callback(status); } }; xhr.send(); };
+      var url = 'https://curaweb.mindscope.com/standardapi_cura/webservices/standardwi.asmx/JobSearchResultsOrdered?ProfileID=0&ProfileID=&ProfileID=&ProfileID=&ProfileID=0&ProfileID=0&ProfileID=0&Varkeyword=&topFive=true&AccountID=WEBINTTEST&AccountKey=ae92772f-9980-4954-87ff-397d583007ad&orderField=ID&orderBy=ASC';
 
+      var xhr = createCORSRequest('GET', url);
+      xhr.send();
 
+      xhr.onload = function() {
+        var text = xhr.responseText;
+        console.log(xhr.response);
+      };
 
-})();
-
-</script>
-
+    })();
+  </script>
 </body>
-
-
 </html>
