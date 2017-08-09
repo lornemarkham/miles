@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+
+
+<h1>Miles API</h1>
+
+
+<script>
+(function() {
+var getJSON = function(url, callback) { var xhr = new XMLHttpRequest(); xhr.open('GET', url, true); xhr.responseType = 'json'; xhr.onload = function() { var status = xhr.status; if (status == 200) { callback(null, xhr.response); } else { callback(status); } }; xhr.send(); };
+
+
+
+})();
+
+</script>
+
+</body>
+
+
+</html>
